@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GymBro.Application
+namespace GymBro.Application.Authentication.Enums
 {
-    public class DummyClass
+    public enum LoginProvider
     {
+        Google = 1,
+        Facebook
     }
 }

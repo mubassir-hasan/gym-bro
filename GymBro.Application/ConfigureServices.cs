@@ -10,10 +10,11 @@ namespace GymBro.Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            
+            services.AddValidatorsFromAssembly(GymBro.Application.AssemblyReference.Assembly,includeInternalTypes:true);
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
 
-            services.AddValidatorsFromAssemblyContaining<DummyClass>();
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
 
             return services;
         }

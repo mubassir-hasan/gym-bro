@@ -3,17 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymBro.Api", "GymBro.Api\GymBro.Api.csproj", "{8E9AAA0E-009B-4B37-95E7-E2324591FA42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymBro.Api", "GymBro.Api\GymBro.Api.csproj", "{8E9AAA0E-009B-4B37-95E7-E2324591FA42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymBro.Application", "GymBro.Application\GymBro.Application.csproj", "{3FC4D59B-FDCD-422A-9B55-80E19C5F0013}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymBro.Application", "GymBro.Application\GymBro.Application.csproj", "{3FC4D59B-FDCD-422A-9B55-80E19C5F0013}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymBro.Domain", "GymBro.Domain\GymBro.Domain.csproj", "{E2F9D3E1-23ED-4CA1-A497-422C341910CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymBro.Domain", "GymBro.Domain\GymBro.Domain.csproj", "{E2F9D3E1-23ED-4CA1-A497-422C341910CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymBro.Infrastructure", "GymBro.Infrastructure\GymBro.Infrastructure.csproj", "{DBF9F322-CC5F-48C8-897C-24D977A6FAB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymBro.Infrastructure", "GymBro.Infrastructure\GymBro.Infrastructure.csproj", "{DBF9F322-CC5F-48C8-897C-24D977A6FAB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymBro.Application.IntegrationTests", "GymBro.Application.IntegrationTests\GymBro.Application.IntegrationTests.csproj", "{1A696303-9B0E-4FE5-A41F-2F8C5C098C4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymBro.Application.IntegrationTests", "GymBro.Application.IntegrationTests\GymBro.Application.IntegrationTests.csproj", "{1A696303-9B0E-4FE5-A41F-2F8C5C098C4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymBro.Infrastructure.IntegrationTests", "GymBro.Infrastructure.IntegrationTests\GymBro.Infrastructure.IntegrationTests.csproj", "{0F06EAA7-724A-4D05-9CDE-572554ABDE21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymBro.Infrastructure.IntegrationTests", "GymBro.Infrastructure.IntegrationTests\GymBro.Infrastructure.IntegrationTests.csproj", "{0F06EAA7-724A-4D05-9CDE-572554ABDE21}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymBro.Application.UnitTests", "GymBro.Application.UnitTests\GymBro.Application.UnitTests.csproj", "{79B15366-0269-4AEF-AB53-A2AAB84F3302}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymBro.Domain.UnitTest", "GymBro.Domain.UnitTest\GymBro.Domain.UnitTest.csproj", "{D7227FEF-C504-4714-A5B2-CF28E57B0EFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymBro.Abstractions", "GymBro.Abstractions\GymBro.Abstractions.csproj", "{F06E8B7B-53BB-4C26-86BE-C0FCA75882E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +51,18 @@ Global
 		{0F06EAA7-724A-4D05-9CDE-572554ABDE21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F06EAA7-724A-4D05-9CDE-572554ABDE21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F06EAA7-724A-4D05-9CDE-572554ABDE21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79B15366-0269-4AEF-AB53-A2AAB84F3302}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79B15366-0269-4AEF-AB53-A2AAB84F3302}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79B15366-0269-4AEF-AB53-A2AAB84F3302}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79B15366-0269-4AEF-AB53-A2AAB84F3302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7227FEF-C504-4714-A5B2-CF28E57B0EFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7227FEF-C504-4714-A5B2-CF28E57B0EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7227FEF-C504-4714-A5B2-CF28E57B0EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7227FEF-C504-4714-A5B2-CF28E57B0EFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F06E8B7B-53BB-4C26-86BE-C0FCA75882E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F06E8B7B-53BB-4C26-86BE-C0FCA75882E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F06E8B7B-53BB-4C26-86BE-C0FCA75882E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F06E8B7B-53BB-4C26-86BE-C0FCA75882E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

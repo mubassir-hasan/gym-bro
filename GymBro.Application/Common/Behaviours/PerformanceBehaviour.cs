@@ -16,7 +16,7 @@ namespace GymBro.Application.Common.Behaviours
         private readonly ILogger<TRequest> _logger;
         private readonly ICurrentUserService _currentUserService;
 
-        public PerformanceBehaviour(Stopwatch timer, ILogger<TRequest> logger, ICurrentUserService currentUserService)
+        public PerformanceBehaviour( ILogger<TRequest> logger, ICurrentUserService currentUserService)
         {
              _timer = new Stopwatch(); ;
             _logger = logger;
