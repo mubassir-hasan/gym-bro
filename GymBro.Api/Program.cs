@@ -15,6 +15,14 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 // Add services to the container.
 
+//builder.Services.Scan(selector => selector
+//.FromAssemblies(GymBro.Application.AssemblyReference.Assembly,
+//GymBro.Infrastructure.AssemblyReference.Assembly)
+//.AddClasses(false)
+//.AsImplementedInterfaces()
+//.WithScopedLifetime()
+//);
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddMediatR(cfg =>
@@ -30,7 +38,7 @@ var jwtSection = builder.Configuration.GetSection("JWT");
 builder.Services.Configure<JwtModel>(jwtSection);
 
 var appSettings = jwtSection.Get<JwtModel>();
-if (appSettings!=null)
+if (appSettings != null)
 {
     var secret = Encoding.ASCII.GetBytes(appSettings.Secret);
     builder.Services.AddAuthentication(options =>
@@ -46,12 +54,12 @@ if (appSettings!=null)
         {
             ValidateIssuer = true,
             ValidateAudience = true,
-            ValidAudience =appSettings.ValidAudience,
+            ValidAudience = appSettings.ValidAudience,
             ValidIssuer = appSettings.ValidIssuer,
             IssuerSigningKey =
                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettings.Secret)),
             ValidateIssuerSigningKey = true,
-            ClockSkew=TimeSpan.Zero,
+            ClockSkew = TimeSpan.Zero,
         };
     });
 }
@@ -70,7 +78,7 @@ builder.Services.AddHttpContextAccessor();
 //builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services.AddControllers(
-    //options =>
+            //options =>
             //options.Filters.Add<ApiExceptionFilterAttribute>()
             );
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

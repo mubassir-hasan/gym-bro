@@ -11,14 +11,7 @@ namespace GymBro.Domain.Entities
 {
     public class WorkoutPlan:BaseAuditableEntity
     {
-        public WorkoutPlan(Title title, string? description, bool isPublic, LanguageEnum language, string userId)
-        {
-            Title = title;
-            Description = description;
-            IsPublic = isPublic;
-            Language = language;
-            UserId = userId;
-        }
+        
 
         public long Id { get; private init; }
         public Title Title { get; set; }

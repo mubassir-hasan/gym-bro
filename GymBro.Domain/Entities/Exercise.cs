@@ -13,14 +13,7 @@ namespace GymBro.Domain.Entities
 {
     public class Exercise:BaseAuditableEntity
     {
-        public Exercise(Title title, bool isPublic, string userId, int totalTimeRequiredToFinishInMin, LanguageEnum language)
-        {
-            Title = title;
-            IsPublic = isPublic;
-            UserId = userId;
-            TotalTimeRequiredToFinishInMin = totalTimeRequiredToFinishInMin;
-            Language = language;
-        }
+        
 
         public long Id { get; private init; }
         public Title Title { get; set; }

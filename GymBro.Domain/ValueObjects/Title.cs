@@ -21,16 +21,16 @@ namespace GymBro.Domain.ValueObjects
 
         public static Result<Title> Create(string title)
         {
-            if (string.IsNullOrWhiteSpace(title))
-                return Result.Failure<Title>(DomainErrors.Title.Empty);
-            if (title.Length > MaxLength)
-                return Result.Failure<Title>(DomainErrors.Title.TooLong);
+            var result = Result.Create(title)
+                .Ensure(x => !string.IsNullOrWhiteSpace(x), DomainErrors.Title.Empty)
+                .Ensure(x=>x.Length<=MaxLength, DomainErrors.Title.TooLong)
+                .Map(e=>new Title(e));
 
-            return new Title(title);
+            return result;
         }
         public override IEnumerable<object> GetAtomicValues()
         {
-            throw new NotImplementedException();
+            yield return Value;
         }
     }
 }

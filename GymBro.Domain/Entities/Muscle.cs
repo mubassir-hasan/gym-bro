@@ -11,11 +11,7 @@ namespace GymBro.Domain.Entities
 {
     public class Muscle : BaseAuditableEntity
     {
-        public Muscle(Title title, string? image)
-        {
-            Title = title;
-            Image = image;
-        }
+        
 
         public int Id { get; private init; }
         public Title Title { get; set; }

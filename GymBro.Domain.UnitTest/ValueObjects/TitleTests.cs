@@ -37,7 +37,7 @@ namespace GymBro.Domain.UnitTest.ValueObjects
             var result = Title.Create(emptyTitle);
 
             result.IsFailure.ShouldBeTrue();
-            result.Error.ShouldBe(DomainErrors.Title.Empty);
+            result.Error.ShouldBe(Abstractions.Error.NullValue);
 
         }
 

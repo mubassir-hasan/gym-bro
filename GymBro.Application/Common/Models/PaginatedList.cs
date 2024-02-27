@@ -9,13 +9,13 @@ namespace GymBro.Application.Common.Models
 {
     public class PaginatedList<T>
     {
-        public List<T> Items { get; }
+        public IReadOnlyList<T> Items { get; }
         public int PageNumber { get; }
         public int TotalPages { get; }
         public long TotalCount { get; }
         public int PageSize { get; set; }
 
-        public PaginatedList(List<T> items, int count, int pageNumber, int pageSize)
+        public PaginatedList(IReadOnlyList<T> items, int count, int pageNumber, int pageSize)
         {
             PageNumber = pageNumber;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
@@ -23,14 +23,14 @@ namespace GymBro.Application.Common.Models
             Items = items;
             PageSize = pageSize;
         }
-        public PaginatedList(List<T> items, long count, int pageNumber, int pageSize)
-        {
-            PageNumber = pageNumber;
-            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
-            TotalCount = count;
-            Items = items;
-            PageSize = pageSize;
-        }
+        //public PaginatedList(IReadOnlyList<T> items, long count, int pageNumber, int pageSize)
+        //{
+        //    PageNumber = pageNumber;
+        //    TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+        //    TotalCount = count;
+        //    Items = items;
+        //    PageSize = pageSize;
+        //}
 
         public bool HasPreviousPage => PageNumber > 1;
 

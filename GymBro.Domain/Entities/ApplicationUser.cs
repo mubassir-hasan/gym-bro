@@ -29,5 +29,7 @@ namespace GymBro.Domain.Entities
                 return $"{FirstName} {LastName}";
             }
         }
+
+        public ICollection<Equipment>? Equipments { get; set; }
     }
 }

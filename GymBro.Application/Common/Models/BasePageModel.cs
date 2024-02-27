@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GymBro.Application.Common.Models
 {
-    public class BasePageModel
+    public record BasePageModel
     {
         private int _page = 1;
         private int _size = 1;

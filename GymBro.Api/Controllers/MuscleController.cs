@@ -1,4 +1,5 @@
 ﻿using GymBro.Application.Muscles.Commands.CreateMuscle;
+using GymBro.Application.Muscles.Queries.GetAllMuscles;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymBro.Api.Controllers
@@ -14,6 +15,13 @@ namespace GymBro.Api.Controllers
                 return HandleFailuer(result);
             }
             return CreatedAtAction("",new {id=result.Value },result.Value);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll([FromQuery] GetAllMusclesQuery query)
+        {
+            var result=await Mediator.Send(query);
+            return Ok(result);
         }
     }
 }
