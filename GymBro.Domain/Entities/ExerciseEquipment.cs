@@ -12,7 +12,7 @@ namespace GymBro.Domain.Entities
     {
         public long Id { get; private init; }
         public long ExerciseId { get; set; }
-        public int EquipmentId { get; set; }
+        public long EquipmentId { get; set; }
 
         public Exercise? Exercise { get; set; }
         public Equipment? Equipment { get; set; }

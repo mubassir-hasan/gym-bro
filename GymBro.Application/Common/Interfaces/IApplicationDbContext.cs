@@ -21,6 +21,8 @@ namespace GymBro.Application.Common.Interfaces
         DbSet<WorkoutHistory> WorkoutHistories { get; }
         DbSet<WorkoutPlan> WorkoutPlans { get; }
         DbSet<WorkoutPlanDetails> WorkoutPlanDetails { get; }
+        DbSet<OutboxMessage> OutboxMessages { get; }
+        DbSet<WorkoutPlanDetailsGroup> WorkoutPlanDetailsGroups { get; }
 
         string GetConnectionString();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);

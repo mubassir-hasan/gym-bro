@@ -1,7 +1,9 @@
 ﻿using GymBro.Abstractions.Caching;
+using GymBro.Abstractions.Shared;
 using GymBro.Application.Common.Interfaces;
 using GymBro.Domain.Entities;
 using GymBro.Domain.Interfaces;
+using GymBro.Infrastructure.BackgroundJobs.Configuration;
 using GymBro.Infrastructure.Caches;
 using GymBro.Infrastructure.Persistence;
 using GymBro.Infrastructure.Persistence.Interceptors;
@@ -18,6 +20,7 @@ namespace GymBro.Infrastructure
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
 
+            services.AddSingleton<InsertOutboxMessageInterceptor>();
             services.AddScoped<AuditableEntitySaveChangesInterceptor>();
 
             if (configuration.GetValue<bool>("UseInMemoryDatabase"))
@@ -27,9 +30,12 @@ namespace GymBro.Infrastructure
             }
             else
             {
-                services.AddDbContext<ApplicationDbContext>(options =>
+                services.AddDbContext<ApplicationDbContext>((sp, options) =>
                     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
-                        builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+                        builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName))
+                    .AddInterceptors(sp.GetRequiredService<InsertOutboxMessageInterceptor>())
+                    .AddInterceptors(sp.GetRequiredService<AuditableEntitySaveChangesInterceptor>())
+                    );
             }
             services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
@@ -59,6 +65,8 @@ namespace GymBro.Infrastructure
             //cache
             services.AddDistributedMemoryCache();
             services.AddSingleton<ICacheService, CacheService>();
+
+            services.AddSingleton<ISqlConnectionFactory, SqlConnectionFactory>();
 
             return services;
         }

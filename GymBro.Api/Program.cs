@@ -5,9 +5,11 @@ using GymBro.Application.Authentication.Interfaces;
 using GymBro.Application.Authentication.Models;
 using GymBro.Application.Common.Interfaces;
 using GymBro.Infrastructure;
+using GymBro.Infrastructure.BackgroundJobs.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.IdentityModel.Tokens;
+using Quartz;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +25,8 @@ var configuration = builder.Configuration;
 //.WithScopedLifetime()
 //);
 
+
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddMediatR(cfg =>
@@ -31,8 +35,14 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(GymBro.Domain.AssemblyReference.Assembly);
 });
 // Add services to the container.
-builder.Services.AddApplicationServices();
-builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services
+    .AddApplicationServices()
+    .AddInfrastructureServices(builder.Configuration);
+
+//background job
+
+builder.Services.AddQuartzConfig();
+
 builder.Services.Configure<GoogleAuthConfigModel>(configuration.GetSection("Authentication:Google"));
 var jwtSection = builder.Configuration.GetSection("JWT");
 builder.Services.Configure<JwtModel>(jwtSection);

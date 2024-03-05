@@ -24,7 +24,7 @@ namespace GymBro.Domain.Entities
         public void Configure(EntityTypeBuilder<ExerciseDetails> builder) 
         {
             builder.Property(x => x.Details).IsRequired();
-            builder.HasOne(x => x.Exercise).WithMany(x => x.RoutineDetails).HasForeignKey(x => x.ExerciseId);
+            builder.HasOne(x => x.Exercise).WithMany(x => x.ExerciseDetails).HasForeignKey(x => x.ExerciseId);
         }
     }
 }

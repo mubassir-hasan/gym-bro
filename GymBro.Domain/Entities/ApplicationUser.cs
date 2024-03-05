@@ -31,5 +31,7 @@ namespace GymBro.Domain.Entities
         }
 
         public ICollection<Equipment>? Equipments { get; set; }
+        public ICollection<WorkoutPlan>? WorkoutPlans { get; set; }
+        public ICollection<WorkoutPlanDetails>? WorkoutPlanDetails { get; set; }
     }
 }

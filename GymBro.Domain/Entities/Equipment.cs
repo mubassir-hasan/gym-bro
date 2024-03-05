@@ -15,8 +15,9 @@ namespace GymBro.Domain.Entities
         
 
         public long Id { get; private init; }
-        public Title Title { get; set; }
-        public string? Image { get; set; }
+        public required Title Title { get; set; }
+        public required string Image { get; set; }
+        public required string EffectedMuscleImage { get; set; }
 
         public string? UserId { get; set; }
 
@@ -31,7 +32,10 @@ namespace GymBro.Domain.Entities
         public void Configure(EntityTypeBuilder<Equipment> builder)
         {
             builder.HasOne(x=>x.User).WithMany(x=>x.Equipments).HasForeignKey(k=>k.UserId).IsRequired(false);
-            builder.Property(x=>x.Title).HasConversion
+            builder.Property(x => x.Title).HasConversion(v => v.Value, v => Title.Create(v).Value).IsRequired(true);
+
+            builder.Property(x=>x.Image).IsRequired(true);
+            builder.Property(x=>x.EffectedMuscleImage).IsRequired(true);
         }
     }
 }

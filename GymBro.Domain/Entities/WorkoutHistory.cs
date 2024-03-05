@@ -1,18 +1,11 @@
-﻿using GymBro.Domain.Enums;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GymBro.Domain.Entities
 {
     public sealed class WorkoutHistory
     {
-        [Key]
+        
         public Guid Id { get; private init; }
         public long ExerciseId { get; set; }
         public long WorkoutPlanId { get; set; }
@@ -30,7 +23,12 @@ namespace GymBro.Domain.Entities
     {
         public void Configure(EntityTypeBuilder<WorkoutHistory> builder)
         {
+            builder.HasKey(builder => builder.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
+
+            builder.HasOne(x=>x.Exercise).WithMany(x=>x.WorkoutHistories).HasForeignKey(x=>x.ExerciseId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.WorkoutPlan).WithMany(x => x.WorkoutHistories).HasForeignKey(k => k.WorkoutPlanId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.ApplicationUser).WithMany(x => x.WorkoutHistories).HasForeignKey(k => k.UserId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

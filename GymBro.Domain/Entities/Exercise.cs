@@ -13,10 +13,9 @@ namespace GymBro.Domain.Entities
 {
     public class Exercise:BaseAuditableEntity
     {
-        
-
         public long Id { get; private init; }
-        public Title Title { get; set; }
+        public required Title Title { get; set; }
+        public required string EffectedMuscleImage { get; set; }
         public bool IsPublic { get; set; }
         /// <summary>
         /// insted of actual count from database we will use estimate total to save some resource
@@ -28,11 +27,12 @@ namespace GymBro.Domain.Entities
         public LanguageEnum Language { get; set; }
 
         public ApplicationUser? User { get; set; }
-        public ICollection<ExerciseDetails>? RoutineDetails { get; set; }
+        public ICollection<ExerciseDetails>? ExerciseDetails { get; set; }
 
         public ICollection<WorkoutHistory>? WorkoutHistories { get; set; }
         public ICollection<ExerciseEquipment>? ExerciseEquipments { get; set; }
         public ICollection<ExerciseMuscle>? ExerciseMuscles { get; set; }
+        public ICollection<WorkoutPlanDetails>? WorkoutPlanDetails { get; set; }
     }
 
     public class MapRoutine : IEntityTypeConfiguration<Exercise>
@@ -41,6 +41,8 @@ namespace GymBro.Domain.Entities
         {
             builder.Property(x => x.Title).IsRequired().HasMaxLength(100);
             builder.HasOne(x => x.User).WithMany(x=>x.Routines).HasForeignKey(x=>x.UserId);
+            builder.Property(x => x.Title).HasConversion(v => v.Value, v => Title.Create(v).Value);
+            builder.Property(x=>x.EffectedMuscleImage).IsRequired();
         }
     }
 }

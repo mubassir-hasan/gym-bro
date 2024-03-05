@@ -1,5 +1,7 @@
 ﻿using GymBro.Domain.Common;
 using GymBro.Domain.ValueObjects;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -14,9 +16,18 @@ namespace GymBro.Domain.Entities
         
 
         public int Id { get; private init; }
-        public Title Title { get; set; }
+        public required Title Title { get; set; }
         public string? Image { get; set; }
 
         public ICollection<ExerciseMuscle>? ExerciseMuscles { get; set; }
+    }
+
+    public class MapMuscle : IEntityTypeConfiguration<Muscle>
+    {
+        public void Configure(EntityTypeBuilder<Muscle> builder)
+        {
+
+            builder.Property(x => x.Title).HasConversion(v => v.Value, v => Title.Create(v).Value);
+        }
     }
 }

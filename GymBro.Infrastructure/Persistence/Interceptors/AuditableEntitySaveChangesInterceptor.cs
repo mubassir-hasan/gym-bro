@@ -15,12 +15,10 @@ namespace GymBro.Infrastructure.Persistence.Interceptors
     public class AuditableEntitySaveChangesInterceptor:SaveChangesInterceptor
     {
         private readonly ICurrentUserService _currentUserService;
-        private readonly IDateTime _dateTime;
 
-        public AuditableEntitySaveChangesInterceptor(ICurrentUserService currentUserService, IDateTime dateTime)
+        public AuditableEntitySaveChangesInterceptor(ICurrentUserService currentUserService)
         {
             _currentUserService = currentUserService;
-            _dateTime = dateTime;
         }
         public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
         {
@@ -45,13 +43,13 @@ namespace GymBro.Infrastructure.Persistence.Interceptors
                 if (entry.State == EntityState.Added)
                 {
                     entry.Entity.CreatedByUserId = _currentUserService.UserId;
-                    entry.Entity.CreateDateUtc = _dateTime.Now;
+                    entry.Entity.CreateDateUtc = DateTime.UtcNow;
                 }
 
                 if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
                 {
                     entry.Entity.ModifiedByUserId = _currentUserService.UserId;
-                    entry.Entity.ModifiedDateUtc = _dateTime.Now;
+                    entry.Entity.ModifiedDateUtc = DateTime.UtcNow;
                 }
             }
         }

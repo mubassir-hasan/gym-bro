@@ -15,14 +15,12 @@ namespace GymBro.Infrastructure.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, AppRole,string>, IApplicationDbContext
     {
-        private readonly AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor;
+        
 
         public ApplicationDbContext(
-            DbContextOptions<ApplicationDbContext> options,
-            AuditableEntitySaveChangesInterceptor auditableEntitySaveChangesInterceptor)
+            DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            _auditableEntitySaveChangesInterceptor = auditableEntitySaveChangesInterceptor;
             
         }
 
@@ -45,6 +43,8 @@ namespace GymBro.Infrastructure.Persistence
         public DbSet<WorkoutPlan> WorkoutPlans => Set<WorkoutPlan>();
 
         public DbSet<WorkoutPlanDetails> WorkoutPlanDetails => Set<WorkoutPlanDetails>();
+        public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
+        public DbSet<WorkoutPlanDetailsGroup> WorkoutPlanDetailsGroups => Set<WorkoutPlanDetailsGroup>();
 
 
         public string GetConnectionString()
@@ -61,7 +61,7 @@ namespace GymBro.Infrastructure.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.AddInterceptors(_auditableEntitySaveChangesInterceptor);
+            
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
